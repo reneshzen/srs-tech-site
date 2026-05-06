@@ -653,38 +653,57 @@
 </footer>
 
 <script>
-  // Smooth scroll
-  document.querySelectorAll('a[href^="#"]').forEach(a => {
-    a.addEventListener('click', e => {
-      const t = document.querySelector(a.getAttribute('href'));
-      if(t){ e.preventDefault(); t.scrollIntoView({behavior:'smooth'}); }
-    });
-  });
+  // Form → Google Sheets → WhatsApp (number: 8940402228)
+  document.getElementById('submitBtn').addEventListener('click', async function(e){
+    e.preventDefault(); // Stop page reload
+    
+    const btn = document.getElementById('submitBtn');
+    const originalText = btn.innerHTML;
+    btn.innerHTML = '⏳ Sending to server...'; // Loading state
+    btn.disabled = true;
 
-  // Form → WhatsApp (number: 8940402228)
-  document.getElementById('submitBtn').addEventListener('click', function(){
+    // 1. Gather the data[cite: 1]
     const name    = document.getElementById('f-name').value.trim() || 'Customer';
     const phone   = document.getElementById('f-phone').value.trim() || 'Not provided';
+    const email   = document.getElementById('f-email').value.trim() || 'Not provided';
     const service = document.getElementById('f-service').value;
     const msg     = document.getElementById('f-msg').value.trim() || 'No details provided';
-    const text = `Hello SRS Tech! 👋\n\n*Name:* ${name}\n*Phone:* ${phone}\n*Service Needed:* ${service}\n*Requirement:* ${msg}\n\nPlease get back to me. Thank you!`;
-    window.open(`https://wa.me/918940402228?text=${encodeURIComponent(text)}`, '_blank');
-  });
 
-  // Scroll fade-in
-  const obs = new IntersectionObserver(entries => {
-    entries.forEach(e => {
-      if(e.isIntersecting){
-        e.target.style.opacity='1';
-        e.target.style.transform='translateY(0)';
-      }
-    });
-  },{threshold:0.08});
-  document.querySelectorAll('.svc-card,.prod-card,.feat-item,.info-row,.staff-r').forEach(el=>{
-    el.style.opacity='0';
-    el.style.transform='translateY(16px)';
-    el.style.transition='opacity 0.48s ease, transform 0.48s ease, box-shadow 0.3s, border-color 0.3s';
-    obs.observe(el);
+    // PASTE YOUR DEPLOYED APPS SCRIPT URL HERE
+    const scriptURL = 'https://script.google.com/macros/s/AKfycbxWikaDsVWPivQRbMMpEjouz5Q_3-ZxmSuW9zAB6dg_H44wRkjab4lCA9dKAZ-OCSgXaw/exec';
+
+    try {
+      // 2. Send data to Google Sheets via POST request
+      await fetch(scriptURL, {
+        method: 'POST',
+        // Using text/plain avoids CORS preflight errors in modern browsers
+        headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+        body: JSON.stringify({ 
+          name: name, 
+          phone: phone, 
+          email: email, 
+          service: service, 
+          message: msg 
+        })
+      });
+
+      // 3. Format WhatsApp Message[cite: 1]
+      const text = `Hello SRS Tech! 👋\n\n*Name:* ${name}\n*Phone:* ${phone}\n*Service Needed:* ${service}\n*Requirement:* ${msg}\n\nPlease get back to me. Thank you!`;
+      
+      // 4. Redirect to WhatsApp[cite: 1]
+      window.open(`https://wa.me/918940402228?text=${encodeURIComponent(text)}`, '_blank');
+
+    } catch (error) {
+      console.error('Error saving to database!', error.message);
+      alert('There was a slight connection issue, but routing you to WhatsApp anyway.');
+      // Fallback routing if the database fails
+      const text = `Hello SRS Tech! 👋\n\n*Name:* ${name}\n*Phone:* ${phone}\n*Service Needed:* ${service}\n*Requirement:* ${msg}`;
+      window.open(`https://wa.me/918940402228?text=${encodeURIComponent(text)}`, '_blank');
+    } finally {
+      // Reset button
+      btn.innerHTML = originalText;
+      btn.disabled = false;
+    }
   });
 </script>
 </body>
