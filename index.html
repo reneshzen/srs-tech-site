@@ -1,0 +1,691 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>SRS Tech – Smart Solutions, Secure Spaces | Kovai Gandhipuram</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,600;0,700;0,900;1,700&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet"/>
+<style>
+  :root {
+    --cream:      #FAF8F4;
+    --cream2:     #F3EFE8;
+    --cream3:     #EDE8DF;
+    --sage:       #A8BFA8;
+    --sage-light: #D6E4D6;
+    --sage-dark:  #4E7A60;
+    --blush:      #E8C9C1;
+    --blush-light:#F7EDEA;
+    --blush-dark: #B86A5E;
+    --sky-light:  #E0EEF7;
+    --sky-dark:   #3D7296;
+    --lav-light:  #EAE6F4;
+    --lav-dark:   #6255A0;
+    --gold:       #C9973A;
+    --gold-light: #F5E8CC;
+    --ink:        #2A2620;
+    --ink2:       #48433E;
+    --ink3:       #7A736A;
+    --white:      #FFFFFF;
+    --border:     rgba(42,38,32,0.1);
+    --shadow:     0 4px 24px rgba(42,38,32,0.08);
+    --shadow-lg:  0 12px 40px rgba(42,38,32,0.13);
+    --wa:         #25D366;
+  }
+  *{margin:0;padding:0;box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{font-family:'DM Sans',sans-serif;background:var(--cream);color:var(--ink);overflow-x:hidden;}
+
+  body::before{
+    content:'';position:fixed;inset:0;
+    background-image:radial-gradient(circle,rgba(42,38,32,0.055) 1px,transparent 1px);
+    background-size:28px 28px;pointer-events:none;z-index:0;
+  }
+
+  /* NAV */
+  nav{
+    position:fixed;top:0;left:0;right:0;z-index:200;
+    display:flex;align-items:center;justify-content:space-between;
+    padding:15px 5%;
+    background:rgba(250,248,244,0.95);
+    backdrop-filter:blur(18px);
+    border-bottom:1px solid var(--border);
+  }
+  .logo{font-family:'Playfair Display',serif;font-size:1.5rem;font-weight:900;color:var(--ink);text-decoration:none;}
+  .logo .dot{color:var(--gold);}
+  .logo .tech{color:var(--sage-dark);}
+  .nav-links{display:flex;gap:2rem;list-style:none;}
+  .nav-links a{color:var(--ink3);text-decoration:none;font-size:0.87rem;font-weight:500;transition:color 0.2s;}
+  .nav-links a:hover{color:var(--sage-dark);}
+  .nav-wa{
+    background:var(--wa);color:#fff;
+    padding:10px 20px;border-radius:50px;
+    font-weight:600;font-size:0.84rem;text-decoration:none;
+    display:flex;align-items:center;gap:7px;
+    box-shadow:0 4px 14px rgba(37,211,102,0.28);
+    transition:all 0.2s;
+  }
+  .nav-wa:hover{background:#1ebe58;transform:translateY(-1px);box-shadow:0 7px 22px rgba(37,211,102,0.38);}
+
+  /* HERO */
+  #hero{
+    min-height:100vh;display:flex;align-items:center;
+    padding:110px 5% 80px;position:relative;overflow:hidden;
+  }
+  .blob1{
+    position:absolute;top:-100px;right:-60px;
+    width:580px;height:580px;border-radius:50%;
+    background:radial-gradient(circle,rgba(168,191,168,0.22) 0%,transparent 68%);
+    pointer-events:none;
+  }
+  .blob2{
+    position:absolute;bottom:-80px;left:-40px;
+    width:380px;height:380px;border-radius:50%;
+    background:radial-gradient(circle,rgba(232,201,193,0.28) 0%,transparent 68%);
+    pointer-events:none;
+  }
+  .hero-content{position:relative;z-index:2;max-width:640px;}
+  .hero-badge{
+    display:inline-flex;align-items:center;gap:7px;
+    background:var(--sage-light);color:var(--sage-dark);
+    font-size:0.73rem;font-weight:600;letter-spacing:1.5px;text-transform:uppercase;
+    padding:7px 15px;border-radius:50px;margin-bottom:26px;
+    border:1px solid rgba(78,122,96,0.2);
+  }
+  h1.hero-title{
+    font-family:'Playfair Display',serif;
+    font-size:clamp(2.3rem,4.8vw,4rem);
+    font-weight:900;line-height:1.12;margin-bottom:22px;
+  }
+  h1.hero-title .l1{color:var(--ink);display:block;}
+  h1.hero-title .l2{color:var(--sage-dark);font-style:italic;display:block;}
+  h1.hero-title .l3{color:var(--blush-dark);display:block;}
+  .hero-desc{font-size:1rem;color:var(--ink3);line-height:1.88;margin-bottom:36px;max-width:510px;font-weight:300;}
+  .hero-btns{display:flex;gap:13px;flex-wrap:wrap;}
+  .btn-wa{
+    background:var(--wa);color:#fff;
+    padding:14px 28px;border-radius:50px;
+    font-weight:600;font-size:0.9rem;text-decoration:none;
+    display:flex;align-items:center;gap:8px;
+    box-shadow:0 6px 22px rgba(37,211,102,0.32);transition:all 0.2s;
+  }
+  .btn-wa:hover{background:#1ebe58;transform:translateY(-2px);box-shadow:0 10px 30px rgba(37,211,102,0.42);}
+  .btn-ghost{
+    background:var(--white);color:var(--ink2);
+    padding:13px 26px;border-radius:50px;
+    font-weight:500;font-size:0.9rem;text-decoration:none;
+    border:1.5px solid var(--border);transition:all 0.2s;
+    box-shadow:var(--shadow);
+  }
+  .btn-ghost:hover{background:var(--cream2);transform:translateY(-1px);}
+
+  /* CCTV HERO CARD */
+  .hero-visual{
+    position:absolute;right:5%;top:50%;transform:translateY(-50%);
+    width:390px;z-index:3;
+  }
+  .cctv-card{
+    background:var(--white);border-radius:20px;
+    border:1px solid var(--border);box-shadow:var(--shadow-lg);overflow:hidden;
+  }
+  .cctv-bar{
+    background:var(--ink);padding:10px 14px;
+    display:flex;align-items:center;gap:7px;
+  }
+  .cb-dot{width:9px;height:9px;border-radius:50%;}
+  .cb-r{background:#E87870;}.cb-y{background:var(--gold);}.cb-g{background:var(--wa);}
+  .cb-label{margin-left:auto;font-size:0.62rem;color:rgba(255,255,255,0.38);letter-spacing:2px;text-transform:uppercase;}
+  .cctv-screen{background:#181818;padding:14px;}
+  .cam-grid{display:grid;grid-template-columns:1fr 1fr;gap:5px;margin-bottom:8px;}
+  .cam-cell{
+    background:#0e0e0e;border-radius:7px;height:86px;
+    position:relative;overflow:hidden;
+    display:flex;align-items:center;justify-content:center;
+    border:1px solid rgba(255,255,255,0.04);
+  }
+  .cc-icon{font-size:1.5rem;opacity:0.18;}
+  .cc-tag{position:absolute;top:5px;left:6px;font-size:0.52rem;color:rgba(255,255,255,0.35);letter-spacing:1px;}
+  .cc-live{position:absolute;top:6px;right:6px;width:5px;height:5px;border-radius:50%;background:var(--wa);animation:blink 1.4s infinite;}
+  .cc-sweep{
+    position:absolute;left:0;right:0;height:1.5px;
+    background:linear-gradient(90deg,transparent,rgba(168,191,168,0.55),transparent);
+    animation:sweep 2.8s linear infinite;
+  }
+  @keyframes sweep{0%{top:0%}100%{top:100%}}
+  @keyframes blink{0%,100%{opacity:1}50%{opacity:0.12}}
+  .cam-chips{display:flex;gap:5px;}
+  .cam-chip{
+    flex:1;background:rgba(255,255,255,0.04);
+    border:1px solid rgba(255,255,255,0.07);
+    border-radius:7px;padding:7px 5px;text-align:center;
+  }
+  .chip-v{font-size:0.88rem;font-weight:700;color:#c8e0c8;}
+  .chip-l{font-size:0.52rem;color:rgba(255,255,255,0.28);margin-top:2px;letter-spacing:1px;}
+  .cctv-foot{
+    background:var(--sage-light);padding:10px 15px;
+    display:flex;align-items:center;gap:7px;
+  }
+  .cctv-foot-live{width:6px;height:6px;border-radius:50%;background:var(--wa);animation:blink 1.4s infinite;flex-shrink:0;}
+  .cctv-foot-txt{font-size:0.74rem;color:var(--sage-dark);font-weight:500;}
+
+  /* STATS */
+  .stats-bar{display:flex;flex-wrap:wrap;background:var(--ink);position:relative;z-index:2;}
+  .stat-item{flex:1;min-width:150px;padding:30px 20px;text-align:center;border-right:1px solid rgba(255,255,255,0.07);}
+  .stat-item:last-child{border-right:none;}
+  .stat-num{font-family:'Playfair Display',serif;font-size:2.3rem;font-weight:900;color:var(--gold);}
+  .stat-lbl{font-size:0.76rem;color:rgba(255,255,255,0.4);margin-top:4px;letter-spacing:1px;}
+
+  /* SECTIONS */
+  section{padding:88px 5%;position:relative;z-index:2;}
+  .sec-tag{
+    font-size:0.71rem;letter-spacing:3px;text-transform:uppercase;
+    color:var(--sage-dark);font-weight:600;margin-bottom:10px;
+    display:flex;align-items:center;gap:8px;
+  }
+  .sec-tag::before{content:'';display:inline-block;width:22px;height:2px;background:var(--sage-dark);border-radius:2px;}
+  .sec-title{font-family:'Playfair Display',serif;font-size:clamp(1.7rem,3vw,2.5rem);font-weight:700;color:var(--ink);margin-bottom:13px;}
+  .sec-sub{font-size:0.97rem;color:var(--ink3);max-width:500px;line-height:1.88;margin-bottom:48px;font-weight:300;}
+
+  /* SERVICES */
+  #services{background:var(--cream);}
+  .services-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(262px,1fr));gap:18px;}
+  .svc-card{
+    background:var(--white);border-radius:16px;
+    border:1px solid var(--border);padding:26px 24px;
+    box-shadow:var(--shadow);transition:all 0.3s;
+  }
+  .svc-card:hover{transform:translateY(-5px);box-shadow:var(--shadow-lg);border-color:rgba(78,122,96,0.25);}
+  .svc-ico{
+    width:52px;height:52px;border-radius:13px;
+    display:flex;align-items:center;justify-content:center;
+    font-size:1.4rem;margin-bottom:16px;
+  }
+  .bg-sage{background:var(--sage-light);}
+  .bg-blush{background:var(--blush-light);}
+  .bg-sky{background:var(--sky-light);}
+  .bg-lav{background:var(--lav-light);}
+  .bg-gold{background:var(--gold-light);}
+  .svc-title{font-weight:600;font-size:0.97rem;color:var(--ink);margin-bottom:9px;}
+  .svc-desc{font-size:0.85rem;color:var(--ink3);line-height:1.78;font-weight:300;}
+
+  /* CCTV */
+  #cctv{background:var(--cream2);}
+  .cctv-split{display:grid;grid-template-columns:1fr 1fr;gap:55px;align-items:center;}
+  .feat-list{display:flex;flex-direction:column;gap:12px;}
+  .feat-item{
+    display:flex;gap:13px;align-items:flex-start;
+    background:var(--white);border-radius:13px;
+    padding:15px 17px;border:1px solid var(--border);
+    box-shadow:0 2px 10px rgba(42,38,32,0.05);transition:all 0.25s;
+  }
+  .feat-item:hover{box-shadow:var(--shadow);transform:translateX(4px);}
+  .feat-ico{
+    width:36px;height:36px;flex-shrink:0;border-radius:9px;
+    background:var(--sage-light);display:flex;align-items:center;
+    justify-content:center;font-size:1rem;
+  }
+  .feat-h{font-weight:600;font-size:0.88rem;color:var(--ink);margin-bottom:3px;}
+  .feat-p{font-size:0.78rem;color:var(--ink3);line-height:1.6;}
+  .showcase{
+    background:var(--white);border-radius:20px;
+    border:1px solid var(--border);padding:22px;
+    box-shadow:var(--shadow-lg);
+  }
+  .feed-big{
+    background:var(--ink);border-radius:10px;height:185px;
+    position:relative;overflow:hidden;
+    display:flex;align-items:center;justify-content:center;
+    margin-bottom:12px;
+  }
+  .fc{position:absolute;width:17px;height:17px;border-color:var(--gold);border-style:solid;}
+  .fc-tl{top:9px;left:9px;border-width:2px 0 0 2px;}
+  .fc-tr{top:9px;right:9px;border-width:2px 2px 0 0;}
+  .fc-bl{bottom:9px;left:9px;border-width:0 0 2px 2px;}
+  .fc-br{bottom:9px;right:9px;border-width:0 2px 2px 0;}
+  .feed-sweep{
+    position:absolute;left:0;right:0;height:2px;
+    background:linear-gradient(90deg,transparent,rgba(201,151,58,0.45),transparent);
+    animation:sweep 2s linear infinite;
+  }
+  .feed-lv{
+    position:absolute;top:9px;right:10px;
+    display:flex;align-items:center;gap:5px;
+    font-size:0.58rem;color:var(--wa);font-weight:600;letter-spacing:1px;
+  }
+  .lv-dot{width:5px;height:5px;border-radius:50%;background:var(--wa);animation:blink 1.2s infinite;}
+  .feed-lbl{font-size:0.68rem;color:rgba(255,255,255,0.3);letter-spacing:2px;}
+  .feed-mini{display:grid;grid-template-columns:repeat(4,1fr);gap:7px;margin-bottom:14px;}
+  .mini{
+    background:var(--ink);border-radius:6px;height:52px;
+    display:flex;align-items:center;justify-content:center;font-size:0.95rem;
+    position:relative;overflow:hidden;opacity:0.75;
+    border:1px solid rgba(255,255,255,0.05);
+  }
+  .mini-sw{
+    position:absolute;left:0;right:0;height:1px;
+    background:rgba(168,191,168,0.38);animation:sweep 2s linear infinite;
+  }
+  .brand-row{
+    background:var(--sage-light);border-radius:10px;
+    padding:11px 14px;display:flex;flex-wrap:wrap;gap:8px;align-items:center;
+  }
+  .brand-chip{
+    font-size:0.7rem;font-weight:600;color:var(--sage-dark);
+    background:var(--white);padding:4px 11px;border-radius:20px;
+    border:1px solid rgba(78,122,96,0.22);
+  }
+
+  /* PRODUCTS */
+  #products{background:var(--cream);}
+  .products-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(175px,1fr));gap:13px;}
+  .prod-card{
+    background:var(--white);border-radius:14px;
+    border:1px solid var(--border);padding:20px 14px;
+    text-align:center;box-shadow:var(--shadow);transition:all 0.25s;
+  }
+  .prod-card:hover{transform:translateY(-4px);box-shadow:var(--shadow-lg);}
+  .prod-ico{
+    width:50px;height:50px;border-radius:13px;
+    margin:0 auto 12px;display:flex;align-items:center;
+    justify-content:center;font-size:1.4rem;
+  }
+  .prod-name{font-weight:600;font-size:0.86rem;color:var(--ink);margin-bottom:4px;}
+  .prod-sub{font-size:0.75rem;color:var(--ink3);font-weight:300;}
+
+  /* CONSULT */
+  #consult{background:var(--cream2);}
+  .consult-wrap{display:grid;grid-template-columns:1fr 1fr;gap:48px;align-items:start;}
+  .c-form{
+    background:var(--white);border-radius:20px;
+    border:1px solid var(--border);padding:32px;
+    box-shadow:var(--shadow);
+  }
+  .c-form-h{font-family:'Playfair Display',serif;font-size:1.28rem;font-weight:700;color:var(--ink);margin-bottom:5px;}
+  .c-form-s{font-size:0.83rem;color:var(--ink3);margin-bottom:24px;font-weight:300;}
+  .fg{margin-bottom:15px;}
+  .fg label{display:block;font-size:0.73rem;color:var(--ink3);font-weight:500;letter-spacing:0.4px;margin-bottom:5px;}
+  .fg input,.fg select,.fg textarea{
+    width:100%;background:var(--cream);
+    border:1.5px solid var(--border);border-radius:10px;
+    padding:11px 13px;color:var(--ink);
+    font-family:'DM Sans',sans-serif;font-size:0.88rem;
+    outline:none;transition:border-color 0.2s;
+  }
+  .fg input:focus,.fg select:focus,.fg textarea:focus{border-color:var(--sage-dark);background:var(--white);}
+  .fg select option{background:#fff;color:var(--ink);}
+  .fg textarea{resize:vertical;min-height:92px;}
+  .fg-row{display:grid;grid-template-columns:1fr 1fr;gap:11px;}
+  .submit-btn{
+    width:100%;background:var(--wa);color:#fff;
+    border:none;padding:14px;font-family:'DM Sans',sans-serif;
+    font-weight:600;font-size:0.92rem;border-radius:50px;
+    cursor:pointer;transition:all 0.2s;
+    box-shadow:0 6px 20px rgba(37,211,102,0.28);
+    display:flex;align-items:center;justify-content:center;gap:9px;
+  }
+  .submit-btn:hover{background:#1ebe58;transform:translateY(-1px);box-shadow:0 10px 28px rgba(37,211,102,0.38);}
+
+  .c-info{display:flex;flex-direction:column;gap:14px;}
+  .info-row{
+    background:var(--white);border-radius:13px;
+    border:1px solid var(--border);padding:17px 18px;
+    display:flex;gap:13px;align-items:flex-start;
+    box-shadow:0 2px 10px rgba(42,38,32,0.04);
+  }
+  .info-ico{
+    width:40px;height:40px;flex-shrink:0;border-radius:11px;
+    background:var(--sage-light);display:flex;align-items:center;
+    justify-content:center;font-size:1.05rem;
+  }
+  .info-lbl{font-size:0.7rem;color:var(--ink3);font-weight:500;letter-spacing:0.5px;text-transform:uppercase;margin-bottom:4px;}
+  .info-v{font-weight:600;color:var(--ink);font-size:0.92rem;line-height:1.5;}
+  .staff-hed{font-size:0.7rem;color:var(--ink3);text-transform:uppercase;letter-spacing:2px;margin-bottom:9px;font-weight:500;}
+  .staff-r{
+    display:flex;align-items:center;gap:12px;
+    background:var(--white);border:1px solid var(--border);
+    border-radius:12px;padding:12px 15px;margin-bottom:9px;
+    box-shadow:0 2px 8px rgba(42,38,32,0.04);
+  }
+  .staff-av{
+    width:38px;height:38px;border-radius:50%;
+    background:var(--sage-light);border:2px solid var(--sage);
+    display:flex;align-items:center;justify-content:center;
+    font-size:0.72rem;font-weight:700;color:var(--sage-dark);
+  }
+  .staff-n{font-weight:600;font-size:0.87rem;color:var(--ink);}
+  .staff-rl{font-size:0.74rem;color:var(--ink3);font-weight:300;}
+  .staff-badge{
+    margin-left:auto;font-size:0.6rem;font-weight:600;
+    background:#e4f7ec;color:#186a3a;
+    border:1px solid rgba(24,106,58,0.2);
+    padding:3px 9px;border-radius:20px;
+  }
+  .wa-direct{
+    display:flex;align-items:center;justify-content:center;gap:9px;
+    background:var(--wa);color:#fff;text-decoration:none;
+    padding:15px;border-radius:14px;font-weight:600;font-size:0.92rem;
+    box-shadow:0 6px 20px rgba(37,211,102,0.28);transition:all 0.2s;
+    margin-top:4px;
+  }
+  .wa-direct:hover{background:#1ebe58;transform:translateY(-2px);box-shadow:0 10px 28px rgba(37,211,102,0.38);}
+
+  /* Float WA */
+  .wa-float{
+    position:fixed;bottom:26px;right:26px;z-index:500;
+    width:56px;height:56px;border-radius:50%;
+    background:var(--wa);color:#fff;
+    display:flex;align-items:center;justify-content:center;
+    font-size:1.5rem;text-decoration:none;
+    box-shadow:0 8px 24px rgba(37,211,102,0.42);
+    animation:floatBtn 3s ease-in-out infinite;
+  }
+  .wa-float:hover{transform:scale(1.1)!important;}
+  @keyframes floatBtn{0%,100%{transform:translateY(0)}50%{transform:translateY(-6px)}}
+
+  /* FOOTER */
+  footer{background:var(--ink);color:rgba(255,255,255,0.65);padding:55px 5% 26px;position:relative;z-index:2;}
+  .footer-grid{display:grid;grid-template-columns:2fr 1fr 1fr;gap:40px;margin-bottom:38px;}
+  .f-logo{font-family:'Playfair Display',serif;font-size:1.38rem;font-weight:900;color:#fff;text-decoration:none;display:inline-block;margin-bottom:13px;}
+  .f-logo .dot{color:var(--gold);}.f-logo .tech{color:var(--sage);}
+  .f-desc{font-size:0.83rem;line-height:1.88;color:rgba(255,255,255,0.42);max-width:295px;font-weight:300;}
+  .f-col-t{font-size:0.7rem;letter-spacing:2px;text-transform:uppercase;color:rgba(255,255,255,0.3);margin-bottom:15px;font-weight:500;}
+  .f-links{list-style:none;display:flex;flex-direction:column;gap:10px;}
+  .f-links a{color:rgba(255,255,255,0.5);text-decoration:none;font-size:0.84rem;transition:color 0.2s;font-weight:300;}
+  .f-links a:hover{color:var(--gold);}
+  .f-bottom{
+    border-top:1px solid rgba(255,255,255,0.07);padding-top:20px;
+    display:flex;justify-content:space-between;align-items:center;
+    font-size:0.76rem;color:rgba(255,255,255,0.28);
+  }
+  .loc-chip{
+    background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.09);
+    padding:4px 13px;border-radius:20px;font-size:0.73rem;color:rgba(255,255,255,0.36);
+  }
+
+  @media(max-width:920px){
+    .hero-visual{display:none;}
+    .cctv-split,.consult-wrap,.footer-grid{grid-template-columns:1fr;}
+    .fg-row{grid-template-columns:1fr;}
+    nav .nav-links{display:none;}
+  }
+</style>
+</head>
+<body>
+
+<!-- Float WhatsApp -->
+<a href="https://wa.me/918940402228" target="_blank" class="wa-float" title="Chat on WhatsApp">💬</a>
+
+<!-- NAV -->
+<nav>
+  <a href="#" class="logo">SRS<span class="dot">.</span><span class="tech">TECH</span></a>
+  <ul class="nav-links">
+    <li><a href="#services">Services</a></li>
+    <li><a href="#cctv">CCTV</a></li>
+    <li><a href="#products">Products</a></li>
+    <li><a href="#consult">Consult</a></li>
+  </ul>
+  <a href="https://wa.me/918940402228" target="_blank" class="nav-wa">💬 WhatsApp Us</a>
+</nav>
+
+<!-- HERO -->
+<section id="hero">
+  <div class="blob1"></div><div class="blob2"></div>
+  <div class="hero-content">
+    <div class="hero-badge">📍 Kovai Gandhipuram, Tamil Nadu</div>
+    <h1 class="hero-title">
+      <span class="l1">Smart Tech.</span>
+      <span class="l2">Secure Spaces.</span>
+      <span class="l3">SRS Solutions.</span>
+    </h1>
+    <p class="hero-desc">
+      From intelligent CCTV surveillance to LED display boards, computer hardware, and printers — SRS Tech delivers complete technology solutions with 50+ successfully completed projects across Coimbatore.
+    </p>
+    <div class="hero-btns">
+      <a href="https://wa.me/918940402228" target="_blank" class="btn-wa">💬 Get Free Consultation</a>
+      <a href="#services" class="btn-ghost">Explore Services</a>
+    </div>
+  </div>
+
+  <div class="hero-visual">
+    <div class="cctv-card">
+      <div class="cctv-bar">
+        <div class="cb-dot cb-r"></div>
+        <div class="cb-dot cb-y"></div>
+        <div class="cb-dot cb-g"></div>
+        <span class="cb-label">SRS Surveillance — Live</span>
+      </div>
+      <div class="cctv-screen">
+        <div class="cam-grid">
+          <div class="cam-cell"><div class="cc-sweep"></div><span class="cc-tag">CAM-01</span><div class="cc-live"></div><span class="cc-icon">📷</span></div>
+          <div class="cam-cell"><div class="cc-sweep" style="animation-delay:.7s"></div><span class="cc-tag">CAM-02</span><div class="cc-live" style="animation-delay:.3s"></div><span class="cc-icon">📷</span></div>
+          <div class="cam-cell"><div class="cc-sweep" style="animation-delay:1.3s"></div><span class="cc-tag">CAM-03</span><div class="cc-live" style="animation-delay:.6s"></div><span class="cc-icon">📷</span></div>
+          <div class="cam-cell"><div class="cc-sweep" style="animation-delay:1.9s"></div><span class="cc-tag">CAM-04</span><div class="cc-live" style="animation-delay:.9s"></div><span class="cc-icon">📷</span></div>
+        </div>
+        <div class="cam-chips">
+          <div class="cam-chip"><div class="chip-v">24/7</div><div class="chip-l">Monitor</div></div>
+          <div class="cam-chip"><div class="chip-v">HD</div><div class="chip-l">Quality</div></div>
+          <div class="cam-chip"><div class="chip-v">50+</div><div class="chip-l">Projects</div></div>
+          <div class="cam-chip"><div class="chip-v">IR</div><div class="chip-l">Night</div></div>
+        </div>
+      </div>
+      <div class="cctv-foot">
+        <div class="cctv-foot-live"></div>
+        <span class="cctv-foot-txt">4 cameras active — Remote monitoring on</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- STATS -->
+<div class="stats-bar">
+  <div class="stat-item"><div class="stat-num">50+</div><div class="stat-lbl">Projects Completed</div></div>
+  <div class="stat-item"><div class="stat-num">8+</div><div class="stat-lbl">Years Experience</div></div>
+  <div class="stat-item"><div class="stat-num">24/7</div><div class="stat-lbl">Support Available</div></div>
+  <div class="stat-item"><div class="stat-num">100%</div><div class="stat-lbl">Client Satisfaction</div></div>
+</div>
+
+<!-- SERVICES -->
+<section id="services">
+  <p class="sec-tag">What We Do</p>
+  <h2 class="sec-title">Our Core Services</h2>
+  <p class="sec-sub">Expert installation and consultation — from surveillance systems to smart display boards and hardware supply.</p>
+  <div class="services-grid">
+    <div class="svc-card"><div class="svc-ico bg-sage">📷</div><div class="svc-title">CCTV Installation</div><p class="svc-desc">Professional setup for homes, offices, shops & industries. HD, IR night vision, and remote mobile monitoring.</p></div>
+    <div class="svc-card"><div class="svc-ico bg-gold">💡</div><div class="svc-title">LED Display Boards</div><p class="svc-desc">Indoor and outdoor LED boards for businesses and events. Custom text, graphics, and scrolling displays.</p></div>
+    <div class="svc-card"><div class="svc-ico bg-sky">🖥️</div><div class="svc-title">Computer Hardware</div><p class="svc-desc">CPU, GPU, RAM, motherboards, and full system builds. Trusted brands with genuine warranty products.</p></div>
+    <div class="svc-card"><div class="svc-ico bg-blush">🖨️</div><div class="svc-title">Printers & Peripherals</div><p class="svc-desc">Laser, inkjet, multifunction printers. Cartridge supply, AMC, and complete printer service solutions.</p></div>
+    <div class="svc-card"><div class="svc-ico bg-lav">🔧</div><div class="svc-title">AMC & Maintenance</div><p class="svc-desc">Annual Maintenance Contracts for cameras, computers, and boards. Quick response, reliable support.</p></div>
+    <div class="svc-card"><div class="svc-ico bg-sage">💬</div><div class="svc-title">Free Consultation</div><p class="svc-desc">Our experts visit your site, assess requirements, and give a detailed solution — completely free.</p></div>
+  </div>
+</section>
+
+<!-- CCTV -->
+<section id="cctv">
+  <p class="sec-tag">Surveillance Experts</p>
+  <h2 class="sec-title">CCTV Camera Solutions</h2>
+  <p class="sec-sub">End-to-end CCTV installation — from site survey to live remote monitoring, handled by our expert team.</p>
+  <div class="cctv-split">
+    <div class="feat-list">
+      <div class="feat-item"><div class="feat-ico">🔍</div><div><div class="feat-h">Site Survey & Planning</div><div class="feat-p">Free site visit to map optimal placement for complete coverage with zero blind spots.</div></div></div>
+      <div class="feat-item"><div class="feat-ico">📡</div><div><div class="feat-h">Wired & Wireless Systems</div><div class="feat-p">IP cameras, analog HD systems, and Wi-Fi cameras for every type of property.</div></div></div>
+      <div class="feat-item"><div class="feat-ico">🌙</div><div><div class="feat-h">Night Vision & IR Cameras</div><div class="feat-p">Crystal-clear footage in total darkness with advanced infrared technology.</div></div></div>
+      <div class="feat-item"><div class="feat-ico">📱</div><div><div class="feat-h">Remote Mobile Monitoring</div><div class="feat-p">Watch your premises anytime from your smartphone — Android & iOS supported.</div></div></div>
+      <div class="feat-item"><div class="feat-ico">🗄️</div><div><div class="feat-h">DVR/NVR Storage Setup</div><div class="feat-p">Secure recording with loop storage. 7 to 60+ days playback as per your need.</div></div></div>
+    </div>
+    <div class="showcase">
+      <div class="feed-big">
+        <div class="fc fc-tl"></div><div class="fc fc-tr"></div>
+        <div class="fc fc-bl"></div><div class="fc fc-br"></div>
+        <div class="feed-sweep"></div>
+        <div class="feed-lv"><div class="lv-dot"></div>LIVE</div>
+        <span class="feed-lbl">MAIN FEED — ACTIVE</span>
+      </div>
+      <div class="feed-mini">
+        <div class="mini"><div class="mini-sw" style="animation-delay:0s"></div>🏪</div>
+        <div class="mini"><div class="mini-sw" style="animation-delay:.5s"></div>🏭</div>
+        <div class="mini"><div class="mini-sw" style="animation-delay:1s"></div>🏠</div>
+        <div class="mini"><div class="mini-sw" style="animation-delay:1.5s"></div>🏢</div>
+      </div>
+      <div class="brand-row">
+        <span class="brand-chip">✔ Hikvision</span>
+        <span class="brand-chip">✔ Dahua</span>
+        <span class="brand-chip">✔ CP Plus</span>
+        <span class="brand-chip">✔ Uniview</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PRODUCTS -->
+<section id="products">
+  <p class="sec-tag">Tech Store</p>
+  <h2 class="sec-title">Hardware Products</h2>
+  <p class="sec-sub">Genuine components and office tech sourced from trusted brands at the best prices in Coimbatore.</p>
+  <div class="products-grid">
+    <div class="prod-card"><div class="prod-ico bg-sky">🖥️</div><div class="prod-name">Processors (CPU)</div><div class="prod-sub">Intel & AMD | Latest Gen</div></div>
+    <div class="prod-card"><div class="prod-ico bg-lav">🎮</div><div class="prod-name">Graphics Cards (GPU)</div><div class="prod-sub">NVIDIA & AMD | Gaming & Pro</div></div>
+    <div class="prod-card"><div class="prod-ico bg-sage">💾</div><div class="prod-name">RAM Modules</div><div class="prod-sub">DDR4 / DDR5 | All Sizes</div></div>
+    <div class="prod-card"><div class="prod-ico bg-blush">🗜️</div><div class="prod-name">Storage (SSD/HDD)</div><div class="prod-sub">Fast SSD & High Cap HDD</div></div>
+    <div class="prod-card"><div class="prod-ico bg-gold">🖨️</div><div class="prod-name">Printers</div><div class="prod-sub">Laser & Inkjet | HP / Epson</div></div>
+    <div class="prod-card"><div class="prod-ico bg-sage">💡</div><div class="prod-name">LED Display Boards</div><div class="prod-sub">Indoor / Outdoor | Custom</div></div>
+    <div class="prod-card"><div class="prod-ico bg-sky">📷</div><div class="prod-name">CCTV Cameras</div><div class="prod-sub">IP / Analog | All Types</div></div>
+    <div class="prod-card"><div class="prod-ico bg-lav">🔌</div><div class="prod-name">Networking</div><div class="prod-sub">Routers, Switches, Cables</div></div>
+  </div>
+</section>
+
+<!-- CONSULT -->
+<section id="consult">
+  <p class="sec-tag">Talk to Us</p>
+  <h2 class="sec-title">Free Consultation</h2>
+  <p class="sec-sub">Reach our team directly. We'll understand your needs and suggest the best solution — no pressure, no cost.</p>
+  <div class="consult-wrap">
+    <div class="c-form">
+      <div class="c-form-h">Request a Callback</div>
+      <div class="c-form-s">Fill your details — we'll reply on WhatsApp within the hour.</div>
+      <div class="fg-row">
+        <div class="fg"><label>Your Name</label><input type="text" placeholder="e.g. Ramesh Kumar" id="f-name"/></div>
+        <div class="fg"><label>Phone Number</label><input type="tel" placeholder="+91 98765 43210" id="f-phone"/></div>
+      </div>
+      <div class="fg"><label>Email (Optional)</label><input type="email" placeholder="yourmail@example.com" id="f-email"/></div>
+      <div class="fg">
+        <label>Service Needed</label>
+        <select id="f-service">
+          <option>CCTV Camera Installation</option>
+          <option>LED Display Board</option>
+          <option>Computer / Hardware</option>
+          <option>Printer Service</option>
+          <option>AMC / Maintenance</option>
+          <option>Not Sure — Need Advice</option>
+        </select>
+      </div>
+      <div class="fg"><label>Your Requirement</label><textarea placeholder="Shop size, no. of cameras needed, location, etc." id="f-msg"></textarea></div>
+      <button class="submit-btn" id="submitBtn">💬 Send via WhatsApp</button>
+    </div>
+
+    <div class="c-info">
+      <div class="info-row">
+        <div class="info-ico">📍</div>
+        <div><div class="info-lbl">Our Location</div><div class="info-v">Gandhipuram, Coimbatore<br><span style="font-size:0.8rem;color:var(--ink3);font-weight:300;">Tamil Nadu, India</span></div></div>
+      </div>
+      <div class="info-row">
+        <div class="info-ico">📞</div>
+        <div><div class="info-lbl">Call / WhatsApp</div><div class="info-v">+91 89404 02228</div></div>
+      </div>
+      <div class="info-row">
+        <div class="info-ico">🕒</div>
+        <div><div class="info-lbl">Working Hours</div><div class="info-v">Mon–Sat: 9:00 AM – 7:00 PM<br><span style="font-size:0.8rem;color:var(--ink3);font-weight:300;">Emergency support: 24/7</span></div></div>
+      </div>
+
+      <div>
+        <p class="staff-hed">Our Experts</p>
+        <div class="staff-r">
+          <div class="staff-av">SR</div>
+          <div><div class="staff-n">Suresh R.</div><div class="staff-rl">CCTV & Networking Lead</div></div>
+          <div class="staff-badge">AVAILABLE</div>
+        </div>
+        <div class="staff-r">
+          <div class="staff-av">KM</div>
+          <div><div class="staff-n">Karthik M.</div><div class="staff-rl">Hardware & Systems</div></div>
+          <div class="staff-badge">AVAILABLE</div>
+        </div>
+        <div class="staff-r">
+          <div class="staff-av">PJ</div>
+          <div><div class="staff-n">Priya J.</div><div class="staff-rl">Sales & Consultation</div></div>
+          <div class="staff-badge">AVAILABLE</div>
+        </div>
+      </div>
+
+      <a href="https://wa.me/918940402228" target="_blank" class="wa-direct">
+        💬 Chat Directly on WhatsApp &rarr;
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-grid">
+    <div>
+      <a href="#" class="f-logo">SRS<span class="dot">.</span><span class="tech">TECH</span></a>
+      <p class="f-desc">Your trusted technology partner in Coimbatore. CCTV, LED boards, computer hardware, and printers — all under one roof.</p>
+    </div>
+    <div>
+      <div class="f-col-t">Quick Links</div>
+      <ul class="f-links">
+        <li><a href="#services">Services</a></li>
+        <li><a href="#cctv">CCTV Solutions</a></li>
+        <li><a href="#products">Products</a></li>
+        <li><a href="#consult">Consultation</a></li>
+      </ul>
+    </div>
+    <div>
+      <div class="f-col-t">Contact</div>
+      <ul class="f-links">
+        <li><a href="https://wa.me/918940402228" target="_blank">💬 WhatsApp: +91 89404 02228</a></li>
+        <li><a href="#">📍 Gandhipuram, Coimbatore</a></li>
+        <li><a href="#">🕒 Mon–Sat: 9 AM – 7 PM</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="f-bottom">
+    <span>© 2025 SRS Tech, Gandhipuram, Coimbatore. All rights reserved.</span>
+    <span class="loc-chip">📍 Kovai, Tamil Nadu</span>
+  </div>
+</footer>
+
+<script>
+  // Smooth scroll
+  document.querySelectorAll('a[href^="#"]').forEach(a => {
+    a.addEventListener('click', e => {
+      const t = document.querySelector(a.getAttribute('href'));
+      if(t){ e.preventDefault(); t.scrollIntoView({behavior:'smooth'}); }
+    });
+  });
+
+  // Form → WhatsApp (number: 8940402228)
+  document.getElementById('submitBtn').addEventListener('click', function(){
+    const name    = document.getElementById('f-name').value.trim() || 'Customer';
+    const phone   = document.getElementById('f-phone').value.trim() || 'Not provided';
+    const service = document.getElementById('f-service').value;
+    const msg     = document.getElementById('f-msg').value.trim() || 'No details provided';
+    const text = `Hello SRS Tech! 👋\n\n*Name:* ${name}\n*Phone:* ${phone}\n*Service Needed:* ${service}\n*Requirement:* ${msg}\n\nPlease get back to me. Thank you!`;
+    window.open(`https://wa.me/918940402228?text=${encodeURIComponent(text)}`, '_blank');
+  });
+
+  // Scroll fade-in
+  const obs = new IntersectionObserver(entries => {
+    entries.forEach(e => {
+      if(e.isIntersecting){
+        e.target.style.opacity='1';
+        e.target.style.transform='translateY(0)';
+      }
+    });
+  },{threshold:0.08});
+  document.querySelectorAll('.svc-card,.prod-card,.feat-item,.info-row,.staff-r').forEach(el=>{
+    el.style.opacity='0';
+    el.style.transform='translateY(16px)';
+    el.style.transition='opacity 0.48s ease, transform 0.48s ease, box-shadow 0.3s, border-color 0.3s';
+    obs.observe(el);
+  });
+</script>
+</body>
+</html>
